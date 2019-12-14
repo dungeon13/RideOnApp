@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">RideOnApp</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="login">Login</string>
+    <string name="firstname">First Name</string>
+    <string name="lastname">Last Name</string>
+    <string name="signupbutton">Sign Up</string>
+    <string name="access_token">pk.eyJ1IjoiY2FzYW5vdmExMyIsImEiOiJjancycHlkN3gwM3NiNDlrbXd6d3VlM3hzIn0.BbCjuamjkJENyYmWoYOfJw</string>
+    <string name="signup">
+       <b> <u>New Account</u></b>
+    </string>
+    <string name="title_activity_signup">signup</string>
+    <string-array name="points">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+        <item>F</item>
+        <item>G</item>
+    </string-array>
+</resources>
