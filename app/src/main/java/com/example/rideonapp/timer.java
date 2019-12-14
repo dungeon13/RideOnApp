@@ -44,6 +44,8 @@ public class timer extends AppCompatActivity  {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast toast = Toast.makeText(getApplicationContext(),"Endind Ride",Toast.LENGTH_SHORT);
+                toast.show();
                 showbook();
             }
         });
@@ -112,7 +114,7 @@ public class timer extends AppCompatActivity  {
         // display book activity
         Bundle b4 = new Bundle();
         b4.putString("user",user);
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this,selectpoint.class);
         intent.putExtras(b4);
         startActivity(intent);
     }

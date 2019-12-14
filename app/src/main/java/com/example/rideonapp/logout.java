@@ -69,7 +69,8 @@ public class logout extends AsyncTask<String,Void,String> {
         if(flag){
             Toast toast = Toast.makeText(context,message,Toast.LENGTH_SHORT);
             toast.show();
-            Intent intent =
+            Intent intent = new Intent(context,MainActivity.class);
+            context.startActivity(intent);
         }
         else{
             Toast toast = Toast.makeText(context,"Error",Toast.LENGTH_SHORT);
