@@ -94,8 +94,9 @@ public class selectpoint extends AppCompatActivity implements AdapterView.OnItem
         protected String doInBackground(String... strings) {
             String result="";
             String inputLine;
+            constants con = new constants();
             try{
-                URL url = new URL("http://192.168.43.61:8080/cycle/book");
+                URL url = new URL(con.ip+"/cycle/book");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setDoOutput(true);
                 //connection.setDoInput(true);

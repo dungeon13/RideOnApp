@@ -30,6 +30,10 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    public static String PREFS_NAME="mypre";
+    public static String PREF_USERNAME="username";
+    public static String PREF_PASSWORD="password";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,14 +64,25 @@ public class MainActivity extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    CheckConnectivity check = new CheckConnectivity();
+                    Boolean flag = check.isConnected(getApplicationContext());
+                    if(flag){
+                        new getResponse().execute(json.toString());
+                    }else{
+                        Toast toast = Toast.makeText(getApplicationContext(),"No Internet",Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
 
-                    new getResponse().execute(json.toString());
                 }else{
                     Toast toast = Toast.makeText(getApplicationContext(),"Empty Field",Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
         });
+    }
+    public void rememberMe(String user){
+        getSharedPreferences(PREFS_NAME,MODE_PRIVATE)
+                .edit().putString(PREF_USERNAME,user).commit();
     }
     public void showSignup(){
         Intent intent = new Intent(this,Signup.class);//InitiaPos.class);
@@ -78,14 +93,17 @@ public class MainActivity extends AppCompatActivity {
         public static final String REQUEST_METHOD = "POST";
         public static final int READ_TIMEOUT = 15000;
         public static final int CONNECTION_TIMEOUT = 15000;
-
+        String roll = "";
         @Override
         protected String doInBackground(String... strings) {
             //String url = "http://192.168.43.61:8080/demo";
             String result="";
             String inputLine;
+            constants con = new constants();
+            //con.helper();
             try{
-                URL url = new URL("http://192.168.43.61:8080/user/login");
+                URL url = new URL(con.ip+"/user/login");
+                //URL url = new URL(con.ip+"/user/login");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setDoOutput(true);
                 //connection.setDoInput(true);
@@ -95,10 +113,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                OutputStreamWriter writer = new OutputStreamWriter(
-                        connection.getOutputStream());
+                OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
                 JSONObject jsonObject = new JSONObject(strings[0]);
-                //System.out.println(jsonObject.toString());
+                roll = jsonObject.getString("username");
+                //Log.v("roll",jsonObject.getString("username"));
                 writer.write(strings[0]);
 
                 writer.flush();
@@ -147,9 +165,10 @@ public class MainActivity extends AppCompatActivity {
                 toast.show();
             }
             if(data.equals("1")){
+                rememberMe(roll);
                 Toast toast = Toast.makeText(getApplicationContext(),"Loggin",Toast.LENGTH_SHORT);
                 toast.show();
-                Intent intent = new Intent(getApplicationContext(),choice.class);
+                Intent intent = new Intent(getApplicationContext(),Map.class);
                 startActivity(intent);
             }
             else{

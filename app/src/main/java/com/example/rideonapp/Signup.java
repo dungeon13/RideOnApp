@@ -68,9 +68,10 @@ public class Signup extends AppCompatActivity {
             //String url = "http://192.168.43.61:8080/demo";
             String result="";
             String inputLine;
+            constants con = new constants();
             try{
 
-                URL url = new URL("http://192.168.43.61:8080/user/signup");
+                URL url = new URL(con.ip+"/user/signup");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setDoOutput(true);
                 connection.setDoInput(true);

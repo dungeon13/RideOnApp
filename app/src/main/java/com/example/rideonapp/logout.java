@@ -22,8 +22,9 @@ public class logout extends AsyncTask<String,Void,String> {
     protected String doInBackground(String... strings) {
         String result = "";
         String inputLine = "";
+        constants con = new constants();
         try{
-            URL url = new URL("http://192.168.43.61:8080/user/logout");
+            URL url = new URL(con.ip+"/user/logout");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);
             connection.setDoInput(true);
@@ -66,8 +67,8 @@ public class logout extends AsyncTask<String,Void,String> {
             Toast toast  = Toast.makeText(context,"Error",Toast.LENGTH_SHORT);
             toast.show();
         }
-        if(flag){
-            Toast toast = Toast.makeText(context,message,Toast.LENGTH_SHORT);
+        if(true){
+            Toast toast = Toast.makeText(context,"Loggint Out",Toast.LENGTH_SHORT);
             toast.show();
             Intent intent = new Intent(context,MainActivity.class);
             context.startActivity(intent);
